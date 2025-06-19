@@ -49,7 +49,7 @@ class PlantByID(Resource):
     def patch(self,id):
         plant=Plant.query.filter_by(id=id).first()
         data=request.get_json()
-        if attr not in data:
+        if  not  data:
             return make_response(jsonify({"error": "Invalid data"}), 400)
 
         for attr,value in data.items():
