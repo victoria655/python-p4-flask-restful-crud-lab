@@ -47,17 +47,17 @@ class PlantByID(Resource):
         plant = Plant.query.filter_by(id=id).first().to_dict()
         return make_response(jsonify(plant), 200)
     def patch(self,id):
-        plant=Plant.query.filter_by(id=id).first().to_dict()
+        plant=Plant.query.filter_by(id=id).first()
         data=request.get_json()
         if attr not in data:
             return make_response(jsonify({"error": "Invalid data"}), 400)
 
         for attr,value in data.items():
             setattr(plant,attr,value)
-        db.session.add(plant)
+        
         db.session.commit()
 
-        return make_response(jsonify(plant), 200)
+        return make_response(jsonify(plant.to_dict), 200)
     
 
     def delete(self,id):
@@ -67,7 +67,7 @@ class PlantByID(Resource):
         db.session.delete(plant)
         db.session.commit()
 
-        return make_response(jsonify({"message": "Plant deleted"}), 200)
+        return make_response(jsonify('{\n"message": "Plant deleted"\n}n'), 200)
     
 
 
