@@ -67,7 +67,8 @@ class PlantByID(Resource):
         db.session.delete(plant)
         db.session.commit()
 
-        return make_response(jsonify('{\n"message": "Plant deleted"\n}n'), 200)
+        return make_response(jsonify
+        ({"message": "Plant deleted"}), 200)
     
 
 
